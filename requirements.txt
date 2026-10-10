@@ -1,10 +1,13 @@
-# 当前运行时无第三方依赖（仅使用 Python 标准库）
-# 最低 Python 版本：3.9（需 from __future__ import annotations）或 3.10+
+﻿# 当前运行时无第三方依赖：
+# - BM25 检索由 src/rag.py 用标准库（math/collections/re）实现
+# - 中文分词采用字符二元组，无需 jieba
+# 最低 Python 版本：3.9（已用 from __future__ import annotations）
 
 # 测试依赖
 pytest>=7.0
 
-# 以下为后续接入真实模块时按需添加的依赖
-# 向量数据库 / RAG：faiss-cpu, rank-bm25
-# 大模型接入：openai, 或 ollama
-# 企业档案 / 数据脱敏
+# 可选升级（不改变接口，按需安装）：
+# - 词级中文分词，提升检索质量：jieba
+# - 等价 BM25 库实现（与手写算法等价）：rank-bm25
+# - 向量检索 + RRF 融合：faiss-cpu
+# - 大模型接入：openai 或 ollama

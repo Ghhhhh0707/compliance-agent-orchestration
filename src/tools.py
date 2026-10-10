@@ -1,39 +1,21 @@
-"""智能体工具层：RAG 检索、企业档案查询和风险评分。"""
+﻿"""智能体工具层：RAG 检索、企业档案查询和风险评分。"""
 
 from __future__ import annotations
 
+from rag import search as bm25_search
 from schemas import EnterpriseProfile, Evidence, RiskResult
 
 
 def rag_search(query: str) -> list[Evidence]:
     """
-    演示版 RAG 检索工具。
+    BM25 关键词检索工具。
 
-    正式版本中，这里将连接：
-    - 向量数据库
-    - 全文关键词检索
-    - RRF 结果融合
-    - Rerank 精排
+    当前委托 src/rag.py 的纯标准库 BM25 实现（字符二元组分词，零第三方依赖）。
+    正式版本可扩展为：向量检索 + 关键词检索 + RRF 融合 + Rerank。
     """
 
-    print(f"[工具调用] RAG 检索：{query}")
-
-    return [
-        Evidence(
-            evidence_id="ev_001",
-            source_type="law",
-            title="中华人民共和国劳动合同法",
-            article="第八十二条",
-            text=(
-                "用人单位自用工之日起超过一个月不满一年"
-                "未与劳动者订立书面劳动合同的，"
-                "应当向劳动者每月支付二倍的工资。"
-            ),
-            document_id="doc_labor_contract_law",
-            chunk_id="chunk_082",
-            score=0.93,
-        )
-    ]
+    print(f"[工具调用] BM25 检索：{query}")
+    return bm25_search(query, top_k=3)
 
 
 def get_enterprise_profile(

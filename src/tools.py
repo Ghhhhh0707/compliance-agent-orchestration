@@ -1,5 +1,7 @@
 """智能体工具层：RAG 检索、企业档案查询和风险评分。"""
 
+from __future__ import annotations
+
 from schemas import EnterpriseProfile, Evidence, RiskResult
 
 

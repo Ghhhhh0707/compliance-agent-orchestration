@@ -1,5 +1,7 @@
 """合规智能体编排器：控制意图识别、工具调用、模型生成和出口校验。"""
 
+from __future__ import annotations
+
 import json
 from dataclasses import asdict
 
